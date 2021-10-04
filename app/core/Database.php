@@ -23,11 +23,11 @@
 			}
 		}
 
-		public function query($query) {
+		public function prepare($query) {
 			$this->stmt = $this->dbh->prepare($query);
 		}
 
-		public function bind($param, $value, $type = null) {
+		public function bindValue($param, $value, $type = null) {
 			if(is_null($type)) {
 				switch(true) {
 					case is_int($value) :
@@ -51,14 +51,38 @@
 			$this->stmt->execute();
 		}
 
-		public function resultSet() {
+		public function beginTransaction() {
+			$this->dbh->beginTransaction();
+		}
+
+		public function commit() {
+			$this->dbh->commit();
+		}
+
+		public function rollBack() {
+			$this->dbh->rollBack();
+		}
+
+		public function errorCode() {
+			$this->dbh->errorCode();
+		}
+
+		public function fetchAll() {
 			$this->execute();
 			return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
 
-		public function single() {
+		public function fetch() {
 			$this->execute();
 			return $this->stmt->fetch(PDO::FETCH_ASSOC);
+		}
+
+		public function rowCount() {
+			return $this->stmt->rowCount();
+		}
+
+		public function lastInsertId() {
+			return $this->dbh->lastInsertId();
 		}
 	}
 

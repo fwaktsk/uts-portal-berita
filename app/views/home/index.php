@@ -1,2 +1,2 @@
-<h1>Welcome to Kampung Naga News!</h1>
-<h2>Written by <?= $data['authorName']; ?></h2>
+<h1>Welcome to my website!</h1>
+<a href="<?= BASE_URL ?>/home/logout" class="btn btn-danger">Logout</a>
