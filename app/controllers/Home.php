@@ -7,7 +7,9 @@
 				exit;
 			}
 
-			$data['title'] = 'Home';
+			$data = [
+				'title' => 'Home'
+			];
 
 			$this->view('templates/header', $data);
 			$this->view('home/index');

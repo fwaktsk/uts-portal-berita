@@ -7,24 +7,37 @@
 				exit;
 			}
 
-			$data['title'] = 'Register';
+			$data = [
+				'title' => 'Register'
+			];
 
 			$this->view('templates/header', $data);
-			$this->view('account/register/index');
+
+			if($_SERVER['REQUEST_METHOD'] === 'POST') {
+				$register_error_msg = $this->model('Register_Model')->_register($_POST);
+
+				if($register_error_msg == '') {
+					header('location: ' . BASE_URL);
+					exit;
+				}
+				else {
+					$data = [
+						'register_error_msg' => $register_error_msg,
+						'user_cred' => $_POST
+					];
+
+					$this->view('account/register/index', $data);
+				}
+			}
+			else {
+				$this->view('account/register/index');
+			}
+
 			$this->view('templates/footer');
 		}
 
-		public function register() {
-			if(($_SESSION['register_error_message'] = $this->model('Register_Model')->_register($_POST)) == '') {
-				unset($_SESSION['register_error_message']);
-				header('location: ' . BASE_URL);
-				exit;
-			}
-			else {
-				// If i remove these two lines below, i would be okay entering "controllers/Register/index"
-				header('location: ' . BASE_URL . '/register');
-				exit;
-			}
+		public function submit() {
+			
 		}
 	}
 

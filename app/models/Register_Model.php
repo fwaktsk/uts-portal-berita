@@ -4,7 +4,7 @@
 		private $dbh;
 
 		public function _register($data) {
-			$register_error = '';
+			$register_error_msg = '';
 
 			if(isset($data['g-recaptcha-response']) && !empty($data['g-recaptcha-response'])) {
 				$response = (array) json_decode(file_get_contents(
@@ -44,10 +44,10 @@
 					} catch(PDOException $e) {
 						$this->dbh->rollBack();
 
-						$register_error = 'Gagal mendaftar. Silakan coba beberapa saat lagi';
+						$register_error_msg = 'Gagal mendaftar. Silakan coba beberapa saat lagi';
 
 						if($e->getCode() == 23000) {
-							$register_error = 'Email atau username telah digunakan';
+							$register_error_msg = 'Email atau username telah digunakan';
 						}
 						else {
 							throw $e;
@@ -57,12 +57,12 @@
 					unset($this->dbh);
 				}
 				else
-					$register_error = 'Verifikasi RECAPTCHA gagal';
+					$register_error_msg = 'Verifikasi RECAPTCHA gagal';
 			}
 			else
-				$register_error = 'Silakan isi verifikasi RECAPTCHA';
+				$register_error_msg = 'Silakan isi verifikasi RECAPTCHA';
 			
-			return $register_error;
+			return $register_error_msg;
 		}
 	}
 
