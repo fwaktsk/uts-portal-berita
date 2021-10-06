@@ -8,7 +8,17 @@
 			}
 
 			$data = [
-				'title' => 'Home'
+				'title' => 'Home',
+				'navbar' => [
+					'Masuk' => [
+						'active' => false,
+						'href' => BASE_URL . '/login'
+					],
+					'Daftar' => [
+						'active' => false,
+						'href' => BASE_URL . '/register'
+					]
+				]
 			];
 
 			$this->view('templates/header', $data);

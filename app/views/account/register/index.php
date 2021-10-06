@@ -1,20 +1,3 @@
-<header>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
-			<a href="#" class="navbar-brand">Company</a>
-			<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarCollapse">
-				<ul class="navbar-nav ms-auto">
-					<li class="nav-item"><a class="nav-link" href="login.php">Masuk</a></li>
-					<li class="nav-item"><a class="nav-link active" href="#">Daftar</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-</header>
-
 <div class="container col-12 col-sm-11 col-md-8 col-lg-6">
 	<form id="registerForm" action="<?= BASE_URL ?>/register" method="post" autocomplete="off">
 		<?php
@@ -80,11 +63,11 @@
 
 		<div class="form-group mb-3">
 			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="gender" id="genderMale" value="0" selected <?php // (isset($data['user_cred']['gender']) && $data['user_cred']['gender'] == 0) ? 'selected' : ''; ?>>
+				<input class="form-check-input" type="radio" name="gender" id="genderMale" value="0" <?= (!isset($data['user_cred']['gender']) || $data['user_cred']['gender'] == 0) ? 'checked' : '' ?>>
 				<label class="form-check-label" for="genderMale">Laki-laki</label>
 			</div>
 			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="gender" id="genderFemale" value="1" <?php // (isset($data['user_cred']['gender']) && $data['user_cred']['gender'] != 0) ? 'selected' : ''; ?>>
+				<input class="form-check-input" type="radio" name="gender" id="genderFemale" value="1" <?= (isset($data['user_cred']['gender']) && $data['user_cred']['gender'] != 0) ? 'checked' : ''; ?>>
 				<label class="form-check-label" for="genderFemale">Perempuan</label>
 			</div>
 		</div>
@@ -146,20 +129,20 @@
 				email: {
 					required: true,
 					emailEx: true,
-					/* remote: {
+					remote: {
 						url: 'email_check.php',
 						type: 'post'
-					} */
+					}
 				},
 				username: {
 					required: true,
 					noSpaceSymbol: true,
 					minlength: 5,
 					maxlength: 36,
-					/* remote: {
+					remote: {
 						url: 'username_check.php',
 						type: 'post'
-					} */
+					}
 				},
 				password: {
 					required: true,
@@ -208,7 +191,7 @@
 				$(element).addClass('is-valid').removeClass('is-invalid');
 			},
 			submitHandler: function(form) {
-				if($("#form").valid()) {
+				if($("#registerForm").valid()) {
 					form.submit();
 				}
 			}

@@ -8,12 +8,24 @@
 			}
 
 			$data = [
-				'title' => 'Register'
+				'title' => 'Register',
+				'navbar' => [
+					'Masuk' => [
+						'active' => false,
+						'href' => BASE_URL . '/login'
+					],
+					'Daftar' => [
+						'active' => true,
+						'href' => '#'
+					]
+				]
 			];
 
 			$this->view('templates/header', $data);
 
 			if($_SERVER['REQUEST_METHOD'] === 'POST') {
+				var_dump($_POST);
+				
 				$register_error_msg = $this->model('Register_Model')->_register($_POST);
 
 				if($register_error_msg == '') {
@@ -36,7 +48,7 @@
 			$this->view('templates/footer');
 		}
 
-		public function submit() {
+		public function emailCheck() {
 			
 		}
 	}

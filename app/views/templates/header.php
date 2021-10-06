@@ -12,3 +12,24 @@
 	</head>
 	
 	<body>
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container-fluid">
+					<a href="#" class="navbar-brand"><?= NAVBAR_BRAND ?></a>
+					<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarCollapse">
+						<ul class="navbar-nav ms-auto">
+							<?php foreach($data['navbar'] as $key => $val) : ?>
+								<li class="nav-item">
+									<a class="nav-link<?= $data['navbar'][$key]['active'] === true ? ' active' : '' ?>" href="<?= $data['navbar'][$key]['href'] ?>">
+										<?= $key ?>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>

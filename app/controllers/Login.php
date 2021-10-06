@@ -7,7 +7,19 @@
 				exit;
 			}
 
-			$data['title'] = 'Login';
+			$data = [
+				'title' => 'Login',
+				'navbar' => [
+					'Masuk' => [
+						'active' => true,
+						'href' => '#'
+					],
+					'Daftar' => [
+						'active' => false,
+						'href' => BASE_URL . '/register'
+					]
+				]
+			];
 
 			$this->view('templates/header', $data);
 			$this->view('account/login/index');

@@ -13,4 +13,7 @@
 	define('RECAPTCHA_SECRET', '6LfOQGocAAAAAC2R4ZlaYfBNg6LUiP6upwRrJV4Z');
 	define('RECAPTCHA_SITE', '6LfOQGocAAAAAIvh6lAkIh10eHKmQysflRJbMl6v');
 
+	// Others
+	define('NAVBAR_BRAND', 'Kampung Naga');
+
 ?>
