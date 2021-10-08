@@ -1,25 +1,25 @@
 <div class="container col-12 col-sm-11 col-md-8 col-lg-6">
-	<form id="registerForm" action="<?= BASE_URL ?>/register" method="post" autocomplete="off">
+	<form id="registerForm" action="<?= BASE_URL; ?>/register" method="post" autocomplete="off">
 		<?php
-			if(!empty($data['register_error_msg'])) {
-				echo
-					'<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">' .
-						'<symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">' .
-							'<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>' .
-						'</symbol>' .
-					'</svg>' .
-					'<div class="alert alert-danger alert-dismissible" role="alert">' .
-						'<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>' .
-						$data['register_error_msg'] .
-						'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' .
-					'</div>';
-			}
+		if (!empty($data['register_error_msg'])) {
+			echo
+			'<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">' .
+				'<symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">' .
+				'<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>' .
+				'</symbol>' .
+				'</svg>' .
+				'<div class="alert alert-danger alert-dismissible" role="alert">' .
+				'<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>' .
+				$data['register_error_msg'] .
+				'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' .
+				'</div>';
+		}
 		?>
 
 		<div class="row mb-3">
 			<div class="col-12 col-sm-6 mb-2">
 				<div class="form-floating">
-					<input type="text" class="form-control" id="firstName" placeholder="First Name" name="first_name" value="<?= isset($data['user_cred']['first_name']) ? $data['user_cred']['first_name'] : ''; ?>">
+					<input type="text" class="form-control" id="firstName" placeholder="First Name" name="first_name" value="<?= isset($data['user_cred']['first_name']) ? $data['user_cred']['first_name'] : ''; ?>" autofocus>
 					<label for="firstName">First Name</label>
 				</div>
 			</div>
@@ -98,7 +98,7 @@
 	$(document).ready(function() {
 		$.validator.addMethod('lettersOnly', function(value, element) {
 			return this.optional(element) || /^[A-Za-z áãâäàéêëèíîïìóõôöòúûüùçñ]+$/i.test(value);
-		}, 'Hanya boleh huruf dan spasi'); 
+		}, 'Hanya boleh huruf dan spasi');
 
 		$.validator.addMethod('emailEx', function(value, element) {
 			return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
@@ -130,7 +130,7 @@
 					required: true,
 					emailEx: true,
 					remote: {
-						url: 'email_check.php',
+						url: '<?= BASE_URL; ?>/register/emailcheck',
 						type: 'post'
 					}
 				},
@@ -140,7 +140,7 @@
 					minlength: 5,
 					maxlength: 36,
 					remote: {
-						url: 'username_check.php',
+						url: '<?= BASE_URL; ?>/register/usernamecheck',
 						type: 'post'
 					}
 				},
@@ -177,10 +177,9 @@
 			errorPlacement: function(error, element) {
 				error.addClass('invalid-feedback');
 
-				if(element.prop('type') === 'radio') {
+				if (element.prop('type') === 'radio') {
 					error.insertAfter(element.next('label'));
-				}
-				else {
+				} else {
 					error.insertAfter(element);
 				}
 			},
@@ -191,7 +190,7 @@
 				$(element).addClass('is-valid').removeClass('is-invalid');
 			},
 			submitHandler: function(form) {
-				if($("#registerForm").valid()) {
+				if ($("#registerForm").valid()) {
 					form.submit();
 				}
 			}

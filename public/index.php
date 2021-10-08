@@ -1,9 +1,7 @@
 <?php
 
-	session_start();
+session_start();
 
-	require_once '../app/init.php';
+require_once '../app/init.php';
 
-	$app = new App;
-
-?>
+$app = new App;
