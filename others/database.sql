@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 	`last_name` VARCHAR(128) NOT NULL,
 	`birth_date` DATE,
 	`gender` BIT NOT NULL DEFAULT 0,
-	`profile_picture` VARCHAR(255) NOT NULL DEFAULT '/images/profile_picture/default.jpg',
+	`profile_picture` VARCHAR(255) NOT NULL DEFAULT '',
 	`datetime_register` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`datetime_last_login` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`is_admin` BIT NOT NULL DEFAULT 0,
@@ -46,11 +46,11 @@ CREATE TABLE IF NOT EXISTS `articles_body` (
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `articles_comments` (
-	`id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+	`account_id` INTEGER UNSIGNED NOT NULL,
 	`article_id` INTEGER UNSIGNED NOT NULL,
 	`comment` MEDIUMTEXT NOT NULL,
 	`datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`),
+	CONSTRAINT `pk_article_comment` PRIMARY KEY (`account_id`, `article_id`),
 	FOREIGN KEY (`article_id`) REFERENCES `articles`(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
